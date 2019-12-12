@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+package com.computefx.example.wallet;
+
+import "google/protobuf/empty.proto";
+
+message User {
+    uint32 userId = 1;
+}
+
+message Money {
+    uint64 amount = 2;
+    enum CurrencyCode {
+        USD = 0;
+        EUR = 1;
+        GBP = 2;
+    }
+    CurrencyCode currency = 3;
+}
+
+message Order {
+    User user = 1;
+    Money money = 2;
+}
+
+message UserBalance {
+    repeated Money balances = 1;
+}
+
+service WalletService {
+    rpc Deposit(Order) returns (google.protobuf.Empty);
+    rpc Withdraw(Order) returns (google.protobuf.Empty);
+    rpc Balance(User) returns (UserBalance);
+}

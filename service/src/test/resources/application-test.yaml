@@ -1,0 +1,7 @@
+grpc:
+  client:
+    wallet-grpc-server:
+      address: 'static://localhost:8080'
+      enableKeepAlive: true
+      keepAliveWithoutCalls: true
+      negotiationType: plaintext

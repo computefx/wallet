@@ -1,0 +1,17 @@
+version: '2.1'
+services:
+  wallet-mysql:
+    image: percona:5.7
+    restart: always
+    volumes:
+      - ~/volumes/wallet/mysql/:/var/lib/mysql
+    environment:
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_ROOT_PASSWORD=secret
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    ports:
+      - 3306:3306
+    expose:
+      # Opens port 3306 on the container
+      - 3306

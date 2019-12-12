@@ -1,0 +1,21 @@
+version: '2.1'
+services:
+  wallet-app:
+    image: wallet
+    environment:
+      - JAVA_OPTIONS=-Xmx512m -Xms256m
+      - SPRING_PROFILES_ACTIVE=prod
+      - SPRING_DATASOURCE_URL=jdbc:mysql://wallet-mysql:3306/${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    depends_on:
+      wallet-mysql:
+        condition: service_healthy
+    ports:
+      - 8080:8080
+  wallet-mysql:
+    extends:
+      file: mysql.yml
+      service: wallet-mysql
+    healthcheck:
+      test: "exit 0"

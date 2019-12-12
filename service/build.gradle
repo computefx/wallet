@@ -1,0 +1,41 @@
+
+plugins {
+    id 'org.springframework.boot' version '2.2.2.RELEASE'
+    id 'io.spring.dependency-management'
+    id 'java'
+    id 'idea'
+}
+
+dependencies {
+    implementation project(':proto')
+    implementation 'io.grpc:grpc-netty:1.25.0'
+    implementation ('net.devh:grpc-server-spring-boot-starter:2.6.1.RELEASE') {
+        exclude group: 'io.grpc', module: 'grpc-netty-shaded'
+    }
+    runtimeOnly 'mysql:mysql-connector-java'
+    implementation 'io.vavr:vavr:0.10.2'
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+    runtimeOnly 'org.flywaydb:flyway-core'
+
+    testImplementation "org.testcontainers:mysql:1.12.3"
+    testImplementation ('net.devh:grpc-client-spring-boot-starter:2.6.1.RELEASE') {
+        exclude group: 'io.grpc', module: 'grpc-netty-shaded'
+    }
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.3.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+//buildscript {
+//    dependencies {
+//        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.2.2.RELEASE")
+//    }
+//}

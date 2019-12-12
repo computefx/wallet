@@ -1,0 +1,26 @@
+plugins {
+    id 'org.springframework.boot' version '2.2.2.RELEASE'
+    id 'io.spring.dependency-management'
+    id 'java'
+    id 'idea'
+}
+
+
+dependencies {
+    implementation project(':proto')
+    implementation 'io.grpc:grpc-netty:1.25.0'
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'info.picocli:picocli:4.1.2'
+    implementation 'io.projectreactor:reactor-core'
+//    implementation 'io.micrometer:micrometer-core'
+    implementation ('net.devh:grpc-client-spring-boot-starter:2.6.1.RELEASE') {
+        exclude group: 'io.grpc', module: 'grpc-netty-shaded'
+    }
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.3.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
+}
+
+
+test {
+    useJUnitPlatform()
+}
